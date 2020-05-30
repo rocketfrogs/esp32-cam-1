@@ -2,10 +2,18 @@
 #include <WiFi.h>
 
 //
-// WARNING!!! Make sure that you have either selected ESP32 Wrover Module,
-//            or another board which has PSRAM enabled
+// WARNING!!! Make sure to select "AI Thinker ESP32-CAM"
+//            and replace the partition scheme to "default" for OTA to work.
+//            If the partition scheme cannot be selected from the Arduino
+//            menu, search for a "boards.txt" file in your $HOME/.arduino
+//            directory, and replace the line:
+//           
+//              esp32cam.build.partitions=huge_app
 //
-
+//            by:
+//
+//              esp32cam.build.partitions=default
+//
 // Select camera model
 //define CAMERA_MODEL_WROVER_KIT
 //#define CAMERA_MODEL_ESP_EYE
@@ -112,7 +120,7 @@ void setup() {
     s->set_saturation(s, -2);//lower the saturation
   }
   //drop down frame size for higher initial frame rate
-  s->set_framesize(s, FRAMESIZE_QVGA);
+  s->set_framesize(s, FRAMESIZE_XGA);
 
 #if defined(CAMERA_MODEL_M5STACK_WIDE)
   s->set_vflip(s, 1);
@@ -177,5 +185,5 @@ void loop() {
   ArduinoOTA.handle();
 #endif
   
-  delay(10000);
+  delay(10);
 }
